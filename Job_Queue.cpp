@@ -49,8 +49,7 @@ class JobQueue {
 
       assigned_workers_[i] = next_worker;
       start_times_[i] = next_free_time.top().first;
-      //cout << "The duration of this job is:" << duration << std::endl;
-      //cout << "Next worker Id: " << next_worker << " AND starting time is: " << next_free_time.top().first << std::endl;
+      
       next_free_time.pop();
       next_free_time.push(std::make_pair(start_times_[i] + duration,next_worker));
       //next_free_time[next_worker] += duration;
