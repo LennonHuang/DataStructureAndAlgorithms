@@ -36,8 +36,9 @@ class JobQueue {
     // TODO: replace this code with a faster algorithm.
     assigned_workers_.resize(jobs_.size());
     start_times_.resize(jobs_.size());
-    vector<long long> releas_t(num_workers_,0) ;//All released time is 0 at first.
-    std::priority_queue<worker, std::vector<worker>, std::greater<worker> > next_free_time;
+    //Use a prioty queue pair<release time, worker index>. Then when the next job comes, we can simply find the top element from
+    //this priority queue (the one that is released first).
+    std::priority_queue<worker, std::vector<worker>, std::greater<worker> > next_free_time;// std::great<type> from <functional> gives us min_heap
     for(int i = 0; i < num_workers_; ++i){
         next_free_time.push(std::make_pair(0,i));
     }
@@ -48,12 +49,11 @@ class JobQueue {
       next_worker = next_free_time.top().second;//The earliest worker that is available
 
       assigned_workers_[i] = next_worker;
-      start_times_[i] = next_free_time.top().first;
-      cout << "The duration of this job is:" << duration << std::endl;
-      cout << "Next worker Id: " << next_worker << " AND starting time is: " << next_free_time.top().first << std::endl;
-      next_free_time.pop();
-      next_free_time.push(std::make_pair(start_times_[i] + duration,next_worker));
-      //next_free_time[next_worker] += duration;
+      start_times_[i] = next_free_time.top().first;//Record the assignement
+      //cout << "The duration of this job is:" << duration << std::endl;
+      //cout << "Next worker Id: " << next_worker << " AND starting time is: " << next_free_time.top().first << std::endl;
+      next_free_time.pop();//Since prority queue cannot be modified. We first pop and then UPDATE the release time of the worker (push).
+      next_free_time.push(std::make_pair(start_times_[i] + duration,next_worker));//Update the release time of the assigned worker
     }
   }
 
