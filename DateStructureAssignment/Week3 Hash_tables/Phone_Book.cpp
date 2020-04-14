@@ -37,7 +37,7 @@ vector<Query> read_queries()
 void write_responses(const vector<string>& result)
 {
     for (size_t i = 0; i < result.size(); ++i)
-        std::cout << "Result: " << result[i] << "\n";
+        std::cout << result[i] << "\n";
 }
 
 vector<string> process_queries(const vector<Query>& queries)
@@ -99,3 +99,4 @@ int main()
     write_responses(process_queries(read_queries()));
     return 0;
 }
+
