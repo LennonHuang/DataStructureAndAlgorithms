@@ -82,7 +82,7 @@ struct DisjointSets
             sets[realSource].size = 0;
 
             max_table_size = max(max_table_size,sets[realDestination].size);// update max_table_size
-            cout << "The parent of " << source + 1 << " is " << getParent(source) +1<< std::endl;
+            //cout << "The parent of " << source + 1 << " is " << getParent(source) +1<< std::endl;
         }
     }
 };
@@ -107,8 +107,9 @@ int main()
         --source;
 
         tables.merge(destination, source);
-        cout << "The maximum of row is: " << tables.max_table_size << endl;
+        cout <<  tables.max_table_size << endl;
     }
 
     return 0;
 }
+
