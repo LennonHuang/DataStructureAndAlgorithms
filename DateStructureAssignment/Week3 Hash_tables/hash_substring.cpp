@@ -38,22 +38,22 @@ std::vector<int> get_occurrences(const Data& input)
     {
         h = (h*x)% p;//will never be negative, thus no need to "+ p"
     }
-    std::cout << "The h value is: "<< h<< "\n";
+    //std::cout << "The h value is: "<< h<< "\n";
     //First Window Hash value
     for(int i = 0; i < s.length(); i++)
     {
         pat_hval = ((x*pat_hval + s[i])% p + p)%p;
         t_haval = ((x*t_haval + t[i])%p + p)%p;
     }
-    std::cout << pat_hval << "\n";
-    std::cout << t_haval<< "\n";
-    std::cout << "There r " << t.length()-s.length()+1<<" windows"<< "\n";
+    //std::cout << pat_hval << "\n";
+    //std::cout << t_haval<< "\n";
+    //std::cout << "There r " << t.length()-s.length()+1<<" windows"<< "\n";
     //Slide every window
     for(int i = 0; i <= t.length()-s.length(); i++)
     {
         if(pat_hval == t_haval)
         {
-            std::cout <<  "Hash Value the same"<< "\n";
+            //std::cout <<  "Hash Value the same"<< "\n";
             //Check every char
             int j;
             for(j = 0; j <s.length(); j++)
@@ -67,10 +67,10 @@ std::vector<int> get_occurrences(const Data& input)
         //Next Window, compute the hash value
         if(i < t.length()-s.length() )
         {
-            std::cout << "The head char: "<< int(t[i])<< "\n";
-            std::cout << "The tail char: "<< int(t[i+s.length()])<< "\n";
+            //std::cout << "The head char: "<< int(t[i])<< "\n";
+            //std::cout << "The tail char: "<< int(t[i+s.length()])<< "\n";
             t_haval = (((t_haval - t[i]*h)*x + t[i+s.length()])%p + p) % p;//Update txt hash value
-            std::cout << "The new txt hash value is "<<t_haval<< "\n";
+            //std::cout << "The new txt hash value is "<<t_haval<< "\n";
         }
     }
 
@@ -84,3 +84,4 @@ int main()
     print_occurrences(get_occurrences(read_input()));
     return 0;
 }
+
