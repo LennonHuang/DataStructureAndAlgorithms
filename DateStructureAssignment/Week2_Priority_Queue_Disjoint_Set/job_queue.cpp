@@ -20,7 +20,7 @@ class JobQueue {
 
   void WriteResponse() const {
     for (int i = 0; i < jobs_.size(); ++i) {
-      cout << "The assigned worker is: " << assigned_workers_[i] << " Starting time is: " << start_times_[i] << "\n";
+      cout << assigned_workers_[i] << " "<< start_times_[i] << "\n";
     }
   }
 
