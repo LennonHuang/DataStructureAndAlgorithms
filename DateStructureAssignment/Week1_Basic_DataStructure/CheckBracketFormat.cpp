@@ -43,7 +43,7 @@ int main() {
         if (next == ')' || next == ']' || next == '}') {
             // Process closing bracket, write your code here
             if(opening_brackets_stack.size() == 0){
-                ans = 1;
+                ans = position + 1;
                 break;
             }
             if(!opening_brackets_stack.top().Matchc(next)){
@@ -60,14 +60,14 @@ int main() {
 
     // Printing answer, write your code here
     if(ans != 0){
-    std::cout << "Wrong Format at: "<< ans << std::endl;
+    std::cout << ans << std::endl;
     }
     else{
         if(num_cls == num_op){
-            std::cout << "Success! " << std::endl;
+            std::cout << "Success" << std::endl;
         }
         else{
-            std::cout << "Missing closing bracket " << std::endl;
+            std::cout << num_cls + num_op << std::endl;
         }
     }
     return 0;
