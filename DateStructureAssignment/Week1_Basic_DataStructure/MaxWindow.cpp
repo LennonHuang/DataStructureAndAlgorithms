@@ -5,7 +5,6 @@
 using std::cin;
 using std::cout;
 using std::vector;
-using std::max;
 
 void max_sliding_window(vector<int> const & A, int w)
 {
@@ -14,14 +13,14 @@ void max_sliding_window(vector<int> const & A, int w)
     //Construc the first window
     for (int j = 0; j < w; ++j)
     {
-        while(!dq.size() == 0 && A.at(j) >= A.at(dq.back()))
+        while(!dq.size() == 0 && A[j] >= A[dq.back()])
         {
             dq.pop_back();//pop useless index
         }
         dq.push_back(j);
-        window_max = A.at(dq.front());
+        window_max = A[dq.front()];
     }
-    cout << window_max << " ";
+    std::cout << window_max << " ";
     /*for(int i = 0; i<dq.size(); ++i)
     {
         std::cout << A.at(dq[i]) << " ";
@@ -30,18 +29,18 @@ void max_sliding_window(vector<int> const & A, int w)
     //Go throu each window
     for (size_t i = 1; i < A.size() - w + 1; ++i)
     {
-        while(i > dq.front())
+        if(i > dq.front())
         {
             dq.pop_front();// index is not within the window
         }
-        while(!dq.size() == 0 && A.at(i+w-1) >= A.at(dq.back()))//Comparing new coming from the right with the elements from deque index
+        while(!dq.size() == 0 && A[i+w-1] >= A[dq.back()])//Comparing new coming from the right with the elements from deque index
         {
             dq.pop_back();//pop useless index
         }
         dq.push_back(i+w-1);
-        window_max = A.at(dq.front());
+        window_max = A[dq.front()];
 
-        cout << window_max << " ";
+        std::cout << window_max << " ";
     }
 
     return;
@@ -56,7 +55,7 @@ int main()
 
     vector<int> A(n);
     for (size_t i = 0; i < n; ++i)
-        cin >> A.at(i);
+        cin >> A[i];
 
     int w = 0;
     cin >> w;
@@ -65,3 +64,4 @@ int main()
 
     return 0;
 }
+
