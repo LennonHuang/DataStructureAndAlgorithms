@@ -17,6 +17,7 @@ public:
     int key;
     Node *parent;
     std::vector<Node *> children;//Children are pointers (pointing at Nodes)
+    int h = 0;
 
     Node()
     {
@@ -44,8 +45,10 @@ int main_with_large_stack_space()
     {
         int parent_index;
         std::cin >> parent_index;//Second input: Parent Index
-        if (parent_index >= 0)// -1 means root while positive number corresponding to parent
+        if (parent_index >= 0) // -1 means root while positive number corresponding to parent
+        {
             nodes[child_index].setParent(&nodes[parent_index]);
+        }
         nodes[child_index].key = child_index;
     }
 
@@ -63,7 +66,10 @@ int main_with_large_stack_space()
     }
     if(root != -1)
     {
+        nodes[root].h = 1;
         q_node.push(nodes[root]);
+        //std::cout << "The root is" << root << "\n";
+        //std::cout << "And the height is" << nodes[root].h << "\n";
         maxHeight += 1;
     }
     else
@@ -78,13 +84,18 @@ int main_with_large_stack_space()
         q_node.pop();
         if(!curr_node.children.empty())
         {
-            maxHeight += 1;
             //Add children into the queue.
             for (int i=0; i < curr_node.children.size(); i++)
             {
+                curr_node.children[i]->h = curr_node.h +1;
                 q_node.push(*curr_node.children[i]);
             }
         }
+        if (curr_node.h > maxHeight)
+        {
+            maxHeight = curr_node.h;
+        }
+        //std::cout << "The height of " << curr_node.key << " is " <<  curr_node.h << "\n";
     }
 
 
